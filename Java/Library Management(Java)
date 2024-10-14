@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Library library = new Library();
+
+        while (true) {
+            System.out.println("1. Display All Items");
+            System.out.println("2. Borrow Item");
+            System.out.println("3. Return Item");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    library.displayAllItems();
+                    break;
+
+                case 2:
+                    System.out.print("Enter the index of the item to borrow: ");
+                    int borrowIndex = scanner.nextInt();
+                    if (borrowIndex >= 0 && borrowIndex < library.items.size()) {
+                        Borrowable borrowableItem = (Borrowable) library.items.get(borrowIndex);
+                        borrowableItem.borrowBook();
+                    } else {
+                        System.out.println("Invalid item index!");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter the index of the item to return: ");
+                    int returnIndex = scanner.nextInt();
+                    if (returnIndex >= 0 && returnIndex < library.items.size()) {
+                        Borrowable borrowableItem = (Borrowable) library.items.get(returnIndex);
+                        borrowableItem.returnBook();
+                    } else {
+                        System.out.println("Invalid item index!");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+        }
+    }
+}
